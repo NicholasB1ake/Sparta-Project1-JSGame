@@ -1,39 +1,39 @@
 $(document).ready(function(){
-    var grid = $('td')
-    var frogIndex = 9;
-
+  var grid = $('td')
+  var frogIndex = 9;
 
   var count = 60, timer = setInterval(function() {
       count--;
       $("#demo").html(count);
-      if (count === 2)
+      if (count === 1)
         alert('you loose');
+        if(count == 1) clearInterval(timer);
+      }, 1000);
 
-      if(count == 1) clearInterval(timer);
-  }, 1000);
+
+
 
 
   $(document).keydown(function(event) {
     switch(event.which) {
-          case 37:
-          left(event);
-      console.log('left');
-          break;
-          case 38:
-          forward(event);
-          break;
+      case 37:
+        left(event);
+        console.log('left');
+      break;
+      case 38:
+        forward(event);
+        break;
+      case 39:
+      right(event);
+      console.log('right');
+      // right
+      break;
+      case 40: // down
+        backwards(event)
+      console.log('down');
+      break;
 
-          case 39:
-          right(event);
-          console.log('right');
-          // right
-          break;
-          case 40: // down
-            backwards(event)
-          console.log('down');
-          break;
-
-          default: return; // exit this handler for other keys
+      default: return; // exit this handler for other keys
       }
       event.preventDefault(); // prevent the default action (scroll / move caret)
   });
@@ -50,6 +50,7 @@ $(document).ready(function(){
     var element = 'td#' + newfIndex;
     $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
     checkForWin(newfIndex);
+    checkForLoss(newfIndex);
 };
 
 function left(event){
@@ -60,11 +61,11 @@ function left(event){
 
   //current index + 20;
   var newfIndex = fIndex - 1;
-  debugger
+
 
   frogIndex = newfIndex;
 
-  debugger;
+
 
   var element = 'td#' + newfIndex;
 
@@ -79,7 +80,7 @@ function right(event){
 
   //current index + 20;
   var newfIndex = fIndex + 1;
-  debugger
+
 
   frogIndex = newfIndex;
 
@@ -102,19 +103,33 @@ function backwards(event){
 
   frogIndex = newfIndex;
 
-
-
   var element = 'td#' + newfIndex;
 
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
 
 };
 
-function checkForWin(fIndex){
-  debugger;
-  if ('td#' + fIndex === 'td#189'){
-    alert('sdfsdf');
+function checkForLoss(fIndex){
+  if ('td#' + fIndex === 'td#148'){
+    alert('youloose')
+    gameEnd()
+    // clearInterval(timer)
+
   }
+
+
+}
+
+function checkForWin(fIndex){
+  if ('td#' + fIndex === 'td#189'){
+    alert('Winner');
+    gameEnd()
+  }
+}
+
+function gameEnd(){
+  if(alert('Play again?')){}
+  else  window.location.reload();
 }
 
 
