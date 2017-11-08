@@ -66,6 +66,8 @@ function left(event){
   frogIndex = newfIndex;
   var element = 'td#' + newfIndex;
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
+  checkForWin(newfIndex);
+  checkForLoss(newfIndex);
 };
 
 function right(event){
@@ -77,6 +79,8 @@ function right(event){
   frogIndex = newfIndex;
   var element = 'td#' + newfIndex;
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
+  checkForWin(newfIndex);
+  checkForLoss(newfIndex);
 };
 
 function backwards(event){
@@ -87,6 +91,8 @@ function backwards(event){
   frogIndex = newfIndex;
   var element = 'td#' + newfIndex;
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
+  checkForWin(newfIndex);
+  checkForLoss(newfIndex);
 
 };
 
