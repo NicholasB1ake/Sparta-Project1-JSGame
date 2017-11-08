@@ -2,6 +2,8 @@ $(document).ready(function(){
   var grid = $('td')
   var frogIndex = 9;
 
+// Global variables, grid = the table array and
+
   var count = 60, timer = setInterval(function() {
       count--;
       $("#demo").html(count);
@@ -11,108 +13,87 @@ $(document).ready(function(){
       }, 1000);
 
 
+      $(document).keydown(function(event) {
+        switch(event.which) {
+          case 37:
+          left(event);
+          console.log('left');
+          break;
+          case 38:
+          forward(event);
+          break;
+          case 39:
+          right(event);
+          console.log('right');
+          // right
+          break;
+          case 40: // down
+          backwards(event)
+          console.log('down');
+          break;
+
+          default: return;
+        }
+        event.preventDefault();
+      });
+
+// Switch statements for curser key binds
 
 
-
-  $(document).keydown(function(event) {
-    switch(event.which) {
-      case 37:
-        left(event);
-        console.log('left');
-      break;
-      case 38:
-        forward(event);
-        break;
-      case 39:
-      right(event);
-      console.log('right');
-      // right
-      break;
-      case 40: // down
-        backwards(event)
-      console.log('down');
-      break;
-
-      default: return; // exit this handler for other keys
-      }
-      event.preventDefault(); // prevent the default action (scroll / move caret)
-  });
-
-  function forward(event){
-    var fIndex = frogIndex;
-    var oldFrog = 'td#' + fIndex + ' img';
-
-    $(oldFrog).remove()
-
-    //current index + 20;
-    var newfIndex = fIndex + 20;
-    frogIndex = newfIndex;
-    var element = 'td#' + newfIndex;
-    $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
-    checkForWin(newfIndex);
-    checkForLoss(newfIndex);
-};
-
-function left(event){
+function forward(event){
   var fIndex = frogIndex;
   var oldFrog = 'td#' + fIndex + ' img';
 
   $(oldFrog).remove()
 
   //current index + 20;
-  var newfIndex = fIndex - 1;
-
-
+  var newfIndex = fIndex + 20;
   frogIndex = newfIndex;
-
-
-
   var element = 'td#' + newfIndex;
+  $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
+  checkForWin(newfIndex);
+  checkForLoss(newfIndex);
+}
+//Movement functions allow frogger to move around the board and check for winning conditions.
 
+function left(event){
+  var fIndex = frogIndex;
+  var oldFrog = 'td#' + fIndex + ' img';
+  $(oldFrog).remove()
+
+  //current index + 20;
+  var newfIndex = fIndex - 1;
+  frogIndex = newfIndex;
+  var element = 'td#' + newfIndex;
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
 };
 
 function right(event){
   var fIndex = frogIndex;
   var oldFrog = 'td#' + fIndex + ' img';
-
   $(oldFrog).remove()
-
   //current index + 20;
   var newfIndex = fIndex + 1;
-
-
   frogIndex = newfIndex;
-
-
-
   var element = 'td#' + newfIndex;
-
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
 };
 
 function backwards(event){
   var fIndex = frogIndex;
   var oldFrog = 'td#' + fIndex + ' img';
-
   $(oldFrog).remove()
-
-  //current index + 20;
   var newfIndex = fIndex - 20;
-
-
   frogIndex = newfIndex;
-
   var element = 'td#' + newfIndex;
-
   $(element).html('<img id="frogger1" src="images/froggerSpriteOne1.png" alt="">');
 
 };
 
 function checkForLoss(fIndex){
   if ('td#' + fIndex === 'td#148'){
-    alert('youloose')
-    gameEnd()
+    alert('You Lose')
+    gameEnd();
     // clearInterval(timer)
 
   }
@@ -123,7 +104,7 @@ function checkForLoss(fIndex){
 function checkForWin(fIndex){
   if ('td#' + fIndex === 'td#189'){
     alert('Winner');
-    gameEnd()
+    gameEnd();
   }
 }
 
@@ -132,6 +113,7 @@ function gameEnd(){
   else  window.location.reload();
 }
 
+//Win and lose fucntions
 
 
 
